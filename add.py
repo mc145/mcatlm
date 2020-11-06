@@ -16,9 +16,6 @@ solution = sys.stdin.read()
 
 # store problem as [contest.tex] 
 
-
-
-
 os.system("add.sh") 
 
 
@@ -30,24 +27,31 @@ if(solution != ""):
     solution_file.write(solution)
 
 
+# Created list of different contests in contest.txt 
+#__________________________________________________________________
+current_contests = open("contest.txt", "r") 
+current_contests_line = current_contests.readline().strip() 
+add_contest = True
+while(current_contests_line != ''):
+    if(current_contests_line == contest):
+         add_contest = False
+    current_contests_line = current_contests.readline().strip() 
+
 current_contests_read = open("contest.txt", "r") 
+current_contest_list = current_contests_read.read()
 
-add_new_contest = True 
-while current_contests_read.readline() != "":
-    check_current_contest = current_contests_read.readline()
-    print(check_current_contest) 
-    if check_current_contest == contest:
-        add_new_contest = False 
-   
-contests_read = open("contest.txt", "r") 
-current_contests_list = contests_read.read() 
-
-if add_new_contest:
-    current_contests_list+= ("\n" + contest) 
+if add_contest == True:
+    current_contest_list+='\n'
+    current_contest_list+=contest 
 
 current_contests_write = open("contest.txt", "w") 
+current_contests_write.write(current_contest_list)
 
-current_contests_write.write(current_contests_list) 
+#_________________________________________________________________________
+
+
+
+
 
 
 

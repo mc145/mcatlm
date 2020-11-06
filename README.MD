@@ -29,7 +29,13 @@ Solved Problems:
         - Search for [contest, tags, and subject] 
         - Delete Problem Entries
         - Create subdirectories for problems from different contests 
+_________________________________________________________________________________________________________________________________________________
 
+Starting Possible Commands: 
+mcatlm-add
+mcatlm-edit
+mcatlm-del
+mcatlm-search 
 _____________________________________________________________________________________________________________-
 
 Entry Process: 
