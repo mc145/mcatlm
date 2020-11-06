@@ -16,6 +16,12 @@ solution = sys.stdin.read()
 
 # store problem as [contest.tex] 
 
+
+
+
+os.system("add.sh") 
+
+
 problem_file = open("problem" + contest_problem + ".tex", "x")
 problem_file.write(problem) 
 
@@ -24,9 +30,28 @@ if(solution != ""):
     solution_file.write(solution)
 
 
-contest_database = open("contest.txt", "r") 
-current_contests = contest_database.read() 
-print(current_contests) 
+current_contests_read = open("contest.txt", "r") 
+
+add_new_contest = True 
+while current_contests_read.readline() != "":
+    check_current_contest = current_contests_read.readline()
+    print(check_current_contest) 
+    if check_current_contest == contest:
+        add_new_contest = False 
+   
+contests_read = open("contest.txt", "r") 
+current_contests_list = contests_read.read() 
+
+if add_new_contest:
+    current_contests_list+= ("\n" + contest) 
+
+current_contests_write = open("contest.txt", "w") 
+
+current_contests_write.write(current_contests_list) 
+
+
+
+
 
 
 
