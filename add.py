@@ -1,5 +1,6 @@
 import sys 
 import os 
+import shutil 
 problem_subject = input("What subject is this problem from (geometry, algebra, number theory, or combinatorics?\n")
 difficulty = int(input("What is the difficulty of this problem in your rating scale?\n")) 
 subject_matter = input("What is the subject matter of this problem (i.e. homethety, totient function)? \n")
@@ -19,35 +20,60 @@ solution = sys.stdin.read()
 os.system("add.sh") 
 
 
-problem_file = open("problem" + contest_problem + ".tex", "x")
-problem_file.write(problem) 
 
-if(solution != ""):
-    solution_file = open("solution" + contest_problem + ".tex", "x")
-    solution_file.write(solution)
+
 
 
 # Created list of different contests in contest.txt 
 #__________________________________________________________________
-current_contests = open("contest.txt", "r") 
-current_contests_line = current_contests.readline().strip() 
 add_contest = True
-while(current_contests_line != ''):
-    if(current_contests_line == contest):
-         add_contest = False
-    current_contests_line = current_contests.readline().strip() 
 
-current_contests_read = open("contest.txt", "r") 
-current_contest_list = current_contests_read.read()
+current_contests = open("contests.txt", "r") 
 
-if add_contest == True:
-    current_contest_list+='\n'
-    current_contest_list+=contest 
+contest_line = current_contests.readline().strip() 
+contest_list = []
+while contest_line != '':
+    contest_list.append(contest_line) 
+    contest_line = current_contests.readline().strip() 
 
-current_contests_write = open("contest.txt", "w") 
-current_contests_write.write(current_contest_list)
+append_contest = ""
+for contests in contest_list:
+    append_contest+='\n' 
+    append_contest+= contests 
+    if contests == contest:
+        add_contest = False 
+if add_contest:
+    append_contest+='\n'
+    append_contest+=contest 
+    contest_write = open("contests.txt", "w") 
+    contest_write.write(append_contest) 
+
+
 
 #_________________________________________________________________________
+
+if add_contest:
+    directory = contest 
+    parent_dir = "C:/Users/Akshay Agarwal/Desktop/mcatlm"
+    path = os.path.join(parent_dir, directory) 
+    os.mkdir(path) 
+    problem_file = open("C:/Users/Akshay Agarwal/Desktop/mcatlm/" + contest + "/" + "problem" + contest_problem + ".tex", "x")
+    problem_file.write(problem)
+    if(solution != ""):
+        solution_file = open("C:/Users/Akshay Agarwal/Desktop/mcatlm/" + contest + "/" + "solution" + contest_problem + ".tex", "x")
+        solution_file.write(solution)
+else: 
+    problem_file = open("C:/Users/Akshay Agarwal/Desktop/mcatlm/" + contest + "/" + "problem" + contest_problem + ".tex", "x")
+    problem_file.write(problem)
+    if(solution != ""):
+        solution_file = open("C:/Users/Akshay Agarwal/Desktop/mcatlm/" + contest + "/" + "solution" + contest_problem + ".tex", "x")
+        solution_file.write(solution)
+
+
+
+    
+
+
 
 
 
